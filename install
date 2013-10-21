@@ -4,8 +4,31 @@
 # https://github.com/kladd/dotfiles
 #
 
+DOTFILES_DIR=$HOME/.dotfiles.d
+
 function has_git() {
 	which git > /dev/null; return $?
 }
 
+mkdir $DOTFILES_DIR || {
+    echo "Error: unable to create directory: $HOME/.dotfiles.d"
+    exit 1
+}
 
+if has_git; then
+    pushd $DOTFILES_DIR
+    git init -q
+    git remote add origin https://github.com/kladd/dotfiles.git
+    git fetch origin master:refs/remotes/origin/master -n
+    git reset --hard origin/master
+    popd
+else
+    echo "Warning: update-dotfiles will not function without git"
+    curl -fsSL https://github.com/kladd/dotfiles/tarball/master | \
+        tar xz -m --strip 1
+fi
+
+$DOTFILES_DIR/install.sh && {
+    echo "Installation successful!"
+    echo "Changes will affect all new sessions"
+}
