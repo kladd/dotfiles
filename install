@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+#
+# Installer for: Dotfiles
+# https://github.com/kladd/dotfiles
+#
+
+function has_git() {
+	which git > /dev/null; return $?
+}
+
+
