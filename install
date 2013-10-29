@@ -15,22 +15,21 @@ mkdir $DOTFILES_DIR || {
     exit 1
 }
 
-pushd $DOTFILES_DIR
+pushd $DOTFILES_DIR && {
+    if has_git; then
+        git init -q
+        git remote add origin https://github.com/kladd/dotfiles.git
+        git fetch origin master:refs/remotes/origin/master -n
+        git reset --hard origin/master
+    else
+        echo "Warning: update-dotfiles will not function without git"
+        curl -fsSL https://github.com/kladd/dotfiles/tarball/master | \
+            tar xz -m --strip 1
+    fi
+} && popd
 
-if has_git; then
-    git init -q
-    git remote add origin https://github.com/kladd/dotfiles.git
-    git fetch origin master:refs/remotes/origin/master -n
-    git reset --hard origin/master
-else
-    echo "Warning: update-dotfiles will not function without git"
-    curl -fsSL https://github.com/kladd/dotfiles/tarball/master | \
-        tar xz -m --strip 1
-fi
-
-./install.sh && {
+$DOTFILES_DIR/install.sh && {
     echo "Installation successful!"
     echo "Changes will affect all new sessions"
 }
 
-popd
