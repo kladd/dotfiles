@@ -22,7 +22,8 @@ function dotfiles()
 {
     function dotfiles_update()
     {
-        pushd $DOTFILES_DIR > /dev/null
+        source $DOTFILES_DIR/.dotfiles
+        pushd $INSTALL_DIR > /dev/null
         git fetch origin master && git rebase FETCH_HEAD
         ./install.sh
         popd > /dev/null
