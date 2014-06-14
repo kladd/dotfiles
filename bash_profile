@@ -83,12 +83,13 @@ prepend_path $HOME/bin
 prepend_path $HOME/android/sdk/tools
 prepend_path $HOME/android/sdk/platform-tools
 
+# Import plugins
+for plugin in ${plugins[@]}; do
+    PLUGIN_DIR="${DOTFILES_DIR}/plugins/${plugin}"
+    import "${PLUGIN_DIR}/${plugin}.plugin.sh"
+done
+
 # Import other dotfiles
 for file in ~/.${dotfiles[@]}; do
     import $file
-done
-
-# Import plugins
-for plugin in ${plugins[@]}; do
-    import ${DOTFILES_DIR}/plugins/${plugin}/${plugin}.plugin.sh
 done

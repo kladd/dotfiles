@@ -3,6 +3,8 @@
 #
 
 if which git > /dev/null; then
+    source $PLUGIN_DIR/git-completion.bash
+
     alias g='git'
 
     alias gl='git log --decorate --abbrev-commit'

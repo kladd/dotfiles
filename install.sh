@@ -5,7 +5,8 @@ INSTALL_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Copy files
 for file in $(ls|grep -v "install.*\|README.*"); do
-    cp -r $PWD/$file "$HOME/.$file"
+    rm -r "$HOME/.$file"
+    cp -r "$PWD/$file" "$HOME/.$file"
 done
 
 # Write dotfiles info
