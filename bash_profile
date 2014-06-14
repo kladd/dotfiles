@@ -14,7 +14,7 @@ plugins=(
     'linux'
     'osx'
     'git'
-    'rvm'
+    'rbenv'
     'barracuda'
 )
 
