@@ -1,0 +1,141 @@
+" Stolen from github.com/skwp/dotfiles
+
+" Use Vim settings, rather then Vi settings (much better!).
+" This must be first, because it changes other options as a side effect.
+set nocompatible
+"set laststatus=2
+set encoding=utf-8
+set t_Co=256
+
+" Use pathogen to easily modify the runtime path to include all plugins under
+" " the ~/.vim/bundle directory
+filetype off                    " force reloading *after* pathogen loaded
+call pathogen#infect()
+call pathogen#helptags()
+filetype plugin indent on       " enable detection, plugins and indenting in one step
+
+" ================ General Config ====================
+
+set number                      "Line numbers are good
+set backspace=indent,eol,start  "Allow backspace in insert mode
+set history=1000                "Store lots of :cmdline history
+set showcmd                     "Show incomplete cmds down the bottom
+"set noshowmode                  "Let powerline handle the mode
+set noerrorbells                " no more error bells
+set gcr=a:blinkon0              "Disable cursor blink
+set autoread                    "Reload files changed outside vim
+set ttyfast                     "Optimize for fast terminal connections
+
+" This makes vim act like all other editors, buffers can
+" exist in the background without being in a window.
+" http://items.sjbach.com/319/configuring-vim-right
+set hidden
+
+"turn on syntax highlighting
+syntax on
+let g:is_bash = 1
+
+" Change the mapleader from \ to ,
+let mapleader=","
+let maplocalleader="\\"
+
+" ================ Colors ===========================
+colorscheme ir_black
+
+" ================ Key bindings =====================
+
+" Remap j and k to act as expected when used on long, wrapped, lines
+nnoremap j gj
+nnoremap k gk
+
+" Easy window navigation
+noremap <C-h> <C-w>h
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+noremap <C-l> <C-w>l
+nmap <leader>s <C-w>s
+nmap <leader>v <C-w>v
+
+" Quick save and exit
+nmap <leader>q <C-w>q
+nmap <leader>w :update<CR>
+
+" Quick yanking to the end of the line
+nnoremap Y y$
+
+" Clears the search register
+nnoremap <silent> <leader>/ :nohlsearch<CR>
+" Dynamic search highlight
+set incsearch
+
+" Sudo to write
+cnoremap w!! w !sudo tee % >/dev/null" Sudo to write
+
+" ================ Turn Off Swap Files ==============
+
+set noswapfile
+set nobackup
+set nowb
+
+" ================ Persistent Undo ==================
+" Keep undo history across sessions, by storing in file.
+" Only works all the time.
+
+if v:version >= 730
+    silent !mkdir ~/.vim/backups > /dev/null 2>&1
+    set undofile                " keep a persistent backup file
+    set undodir=~/.vim/backups
+endif
+
+" ================ Indentation ======================
+
+set autoindent
+set smartindent
+set smarttab
+set shiftwidth=4
+set softtabstop=4
+set tabstop=4
+set expandtab
+
+nmap <leader>m :set expandtab tabstop=2 softtabstop=2 shiftwidth=2<CR>
+nmap <leader>t :set expandtab tabstop=4 softtabstop=4 shiftwidth=4<CR>
+nmap <leader>l :set expandtab tabstop=3 softtabstop=3 shiftwidth=3<CR>
+nmap <leader>k :set noexpandtab tabstop=8 softtabstop=8 shiftwidth=8<CR>
+
+autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
+autocmd Filetype c setlocal noexpandtab ts=8 sts=8 sw=8
+
+filetype plugin on
+filetype indent on
+
+" Display tabs and trailing spaces visually
+set list listchars=tab:\ \ ,trail:·
+
+set nowrap       "Don't wrap lines
+set linebreak    "Wrap lines at convenient points
+
+" ================ Folds ============================
+
+set foldmethod=indent   "fold based on indent
+set foldnestmax=3       "deepest fold is 3 levels
+set nofoldenable        "dont fold by default
+
+" ================ Completion =======================
+
+set wildmode=list:longest
+set wildmenu                "enable ctrl-n and ctrl-p to scroll thru matches
+set wildignore=*.o,*.obj,*~ "stuff to ignore when tab completing
+set wildignore+=*vim/backups*
+set wildignore+=*sass-cache*
+set wildignore+=*DS_Store*
+set wildignore+=vendor/rails/**
+set wildignore+=vendor/cache/**
+set wildignore+=*.gem
+set wildignore+=log/**
+set wildignore+=tmp/**
+set wildignore+=*.png,*.jpg,*.gif
+
+" ================ Scrolling ========================
+
+set scrolloff=8         "Start scrolling when we're 8 lines away from margins
+set sidescroll=1
