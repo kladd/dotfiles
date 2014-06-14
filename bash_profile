@@ -90,6 +90,6 @@ for plugin in ${plugins[@]}; do
 done
 
 # Import other dotfiles
-for file in ~/.${dotfiles[@]}; do
-    import $file
+for file in ${dotfiles[@]}; do
+    import "${HOME}/.${file}"
 done
