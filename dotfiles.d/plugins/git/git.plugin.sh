@@ -11,7 +11,7 @@ if which git > /dev/null; then
     alias gg='git log --graph --oneline --decorate'
     alias gco='git checkout'
 
-    alias gc='git commit'
+    alias gc='git commit --verbose'
     alias gca='git commit -a'
     alias gf='git fetch'
     alias grm='git diff --diff-filter=D --name-only -z | xargs -0 git rm' 
