@@ -3,7 +3,7 @@
 " Use Vim settings, rather then Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
 set nocompatible
-"set laststatus=2
+set laststatus=2
 set encoding=utf-8
 set t_Co=256
 
@@ -19,12 +19,16 @@ filetype plugin indent on       " enable detection, plugins and indenting in one
 set number                      "Line numbers are good
 set backspace=indent,eol,start  "Allow backspace in insert mode
 set history=1000                "Store lots of :cmdline history
-set showcmd                     "Show incomplete cmds down the bottom
-"set noshowmode                  "Let powerline handle the mode
+"set noshowmode                 "Let powerline handle the mode
 set noerrorbells                " no more error bells
 set gcr=a:blinkon0              "Disable cursor blink
 set autoread                    "Reload files changed outside vim
 set ttyfast                     "Optimize for fast terminal connections
+set clipboard=unnamed           "Use OS clipboard by default
+set modeline
+set modelines=4
+set cursorline
+
 
 " This makes vim act like all other editors, buffers can
 " exist in the background without being in a window.
@@ -95,7 +99,7 @@ set smarttab
 set shiftwidth=4
 set softtabstop=4
 set tabstop=4
-set expandtab
+set noexpandtab
 
 nmap <leader>m :set expandtab tabstop=2 softtabstop=2 shiftwidth=2<CR>
 nmap <leader>t :set expandtab tabstop=4 softtabstop=4 shiftwidth=4<CR>
@@ -104,15 +108,16 @@ nmap <leader>k :set noexpandtab tabstop=8 softtabstop=8 shiftwidth=8<CR>
 
 autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
 autocmd Filetype c setlocal noexpandtab ts=8 sts=8 sw=8
+autocmd Filetype php setlocal noexpandtab ts=4 sts=4 sw=4
 
 filetype plugin on
 filetype indent on
 
 " Display tabs and trailing spaces visually
 set list listchars=tab:\ \ ,trail:·
-
-set nowrap       "Don't wrap lines
+set wrap         "Don't wrap lines
 set linebreak    "Wrap lines at convenient points
+" set nolist  " list disables linebreak
 
 " ================ Folds ============================
 
