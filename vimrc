@@ -28,7 +28,7 @@ set clipboard=unnamed           "Use OS clipboard by default
 set modeline
 set modelines=4
 set cursorline
-
+set tags=.git/tags,./tags,~/tags
 
 " This makes vim act like all other editors, buffers can
 " exist in the background without being in a window.
