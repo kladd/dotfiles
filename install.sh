@@ -3,6 +3,8 @@
 DOTFILES_DIR=${HOME}/.dotfiles.d
 INSTALL_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+git submodule update --recursive --init
+
 mkdir out
 
 for file in $(ls|grep -v "install.*\|README.*\|out"); do
