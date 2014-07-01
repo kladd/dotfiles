@@ -2,7 +2,9 @@
 # rbenv.plugin.sh
 #
 
-prepend_path "${HOME}/.rbenv/bin"
-prepend_path "${HOME}/.rbenv/plugins/ruby-build/bin"
+if [ -d "${HOME}"/.rbenv ]; then
+	prepend_path "${HOME}/.rbenv/bin"
+	prepend_path "${HOME}/.rbenv/plugins/ruby-build/bin"
 
-eval "$(rbenv init -)"
+	eval "$(rbenv init -)"
+fi
