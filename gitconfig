@@ -57,7 +57,7 @@
 	# List contributors with number of commits
 	contributors = shortlog --summary --numbered
 
-    ctags = '!.git/hooks/ctags'
+    ctags = "!.git/hooks/ctags"
 
 [apply]
 
