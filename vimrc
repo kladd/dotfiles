@@ -109,6 +109,7 @@ nmap <leader>k :set noexpandtab tabstop=8 softtabstop=8 shiftwidth=8<CR>
 autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
 autocmd Filetype c setlocal noexpandtab ts=8 sts=8 sw=8
 autocmd Filetype php setlocal noexpandtab ts=4 sts=4 sw=4
+autocmd Filetype haskell setlocal expandtab
 
 filetype plugin on
 filetype indent on
