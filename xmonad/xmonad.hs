@@ -28,12 +28,14 @@ myWorkspaces = map show [1..9]
 -- dmenu
 --
 dmenu_command = concat
-    [ "dmenu_run "
+    [ "j4-dmenu-desktop "
+    , "--dmenu=\""
     , "-fn \"xft:Segoe UI-10\" "
     , "-nb \"#000000\" "
     , "-nf \"#FFFFFF\" "
     , "-sb \"#CCEFAC\" "
     , "-sf \"#000000\""
+    , "\""
     ]
 
 -------------------------------------------------------------------------------
