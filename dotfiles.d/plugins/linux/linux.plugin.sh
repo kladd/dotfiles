@@ -39,4 +39,6 @@ if uname|grep "Linux" > /dev/null; then
         . /usr/share/git/completion/git-prompt.sh
     [[ -f /usr/share/git-core/contrib/completion/git-prompt.sh ]] && \
         . /usr/share/git-core/contrib/completion/git-prompt.sh
+	[[ -d $HOME/.cabal/bin ]] && \
+		prepend_path $HOME/.cabal/bin
 fi
