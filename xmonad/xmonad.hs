@@ -59,7 +59,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 -------------------------------------------------------------------------------
 
 main = do
-    xmproc <- spawnPipe "xmobar ~/.xmonad/xmobar.hs"
+    xmproc <- spawnPipe "~/.cabal/bin/xmobar ~/.xmonad/xmobar.hs"
     xmonad $ defaultConfig
         { terminal = "/usr/bin/gnome-terminal"
         , workspaces = myWorkspaces
