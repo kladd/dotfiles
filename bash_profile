@@ -16,6 +16,7 @@ plugins=(
     'git'
     'rbenv'
     'barracuda'
+	'breach'
 )
 
 function dotfiles()
