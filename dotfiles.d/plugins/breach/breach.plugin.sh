@@ -1,1 +1,1 @@
-prepend_path "$HOME/src/exo_browser/depot_tools"
+prepend_path "$HOME/src/depot_tools"
