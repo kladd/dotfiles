@@ -5,6 +5,7 @@
 if uname|grep "Darwin" > /dev/null; then
     prepend_path $(brew --prefix)/bin
     prepend_path $(brew --prefix)/share/npm/bin
+	prepend_path "/opt/X11/bin"
     prepend_path "/Applications/VMWare Fusion.app/Contents/Library"
 
     [[ -f $(brew --prefix)/etc/bash_completion ]] && {
