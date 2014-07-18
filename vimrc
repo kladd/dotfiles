@@ -10,8 +10,13 @@ set t_Co=256
 " Use pathogen to easily modify the runtime path to include all plugins under
 " " the ~/.vim/bundle directory
 filetype off                    " force reloading *after* pathogen loaded
-call pathogen#infect()
-call pathogen#helptags()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+Plugin 'gmarik/Vundle.vim'
+Plugin 'tpope/vim-fugitive'
+
+call vundle#end()
 filetype plugin indent on       " enable detection, plugins and indenting in one step
 
 " ================ General Config ====================
