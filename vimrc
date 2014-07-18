@@ -16,6 +16,8 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'bling/vim-airline'
+Plugin 'majutsushi/tagbar'
+Plugin 'mileszs/ack.vim'
 
 call vundle#end()
 filetype plugin indent on       " enable detection, plugins and indenting in one step
@@ -25,7 +27,6 @@ filetype plugin indent on       " enable detection, plugins and indenting in one
 set number                      "Line numbers are good
 set backspace=indent,eol,start  "Allow backspace in insert mode
 set history=1000                "Store lots of :cmdline history
-"set noshowmode                 "Let powerline handle the mode
 set noerrorbells                " no more error bells
 set gcr=a:blinkon0              "Disable cursor blink
 set autoread                    "Reload files changed outside vim
@@ -47,6 +48,11 @@ set nocursorcolumn
 set nocursorline
 syntax sync minlines=256
 let g:is_bash = 1
+
+" Airline configuration
+let g:airline_powerline_fonts = 1
+let g:airline_detect_paste = 1
+let g:airline_theme='simple'
 
 " Change the mapleader from \ to ,
 let mapleader=","
@@ -124,10 +130,9 @@ filetype plugin on
 filetype indent on
 
 " Display tabs and trailing spaces visually
-set list listchars=tab:\ \ ,trail:·
 set wrap         "Don't wrap lines
 set linebreak    "Wrap lines at convenient points
-" set nolist  " list disables linebreak
+set nolist       "List disables linebreak
 
 " ================ Folds ============================
 
