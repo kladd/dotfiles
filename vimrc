@@ -15,6 +15,7 @@ call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
+Plugin 'bling/vim-airline'
 
 call vundle#end()
 filetype plugin indent on       " enable detection, plugins and indenting in one step
