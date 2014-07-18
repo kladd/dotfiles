@@ -37,6 +37,9 @@ set hidden
 
 "turn on syntax highlighting
 syntax on
+set nocursorcolumn
+set nocursorline
+syntax sync minlines=256
 let g:is_bash = 1
 
 " Change the mapleader from \ to ,
