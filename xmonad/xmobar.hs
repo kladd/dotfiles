@@ -13,7 +13,7 @@ Config
     [ Run Weather "KARB" ["-t","<tempF>F - <skyCondition>","-L","64","-H","77","-n","#CEFFAC","-h","#FFB6B0","-l","#96CBFE"] 36000
     , Run Memory ["-t","Mem: <usedratio>%","-h","#FFB6B0","-l","#CEFFAC","-n","#FFFFCC"] 10
     , Run Swap ["-t","Swap: <usedratio>%","-h","#FFB6B0","-l","#CEFFAC","-n","#FFFFCC"] 10
-    , Run Network "wlan0" ["-t","Net: <rx>, <tx>","-H","200","-L","10","-h","#FFB6B0","-l","#CEFFAC","-n","#FFFFCC"] 10
+    , Run Network "wlp3s0" ["-t","Net: <rx>, <tx>","-H","200","-L","10","-h","#FFB6B0","-l","#CEFFAC","-n","#FFFFCC"] 10
     , Run Date "%a %b %_d %l:%M" "date" 10
     , Run StdinReader
     ]

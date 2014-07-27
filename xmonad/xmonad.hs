@@ -6,6 +6,7 @@ import XMonad
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Layout.Spacing
+import XMonad.Layout.IndependentScreens
 import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.EZConfig(additionalKeys)
 
@@ -28,14 +29,12 @@ myWorkspaces = map show [1..9]
 -- dmenu
 --
 dmenu_command = concat
-    [ "j4-dmenu-desktop "
-    , "--dmenu=\"dmenu -i "
+    [ "dmenu_run -i "
     , "-fn \"xft:Segoe UI-10\" "
     , "-nb \"#000000\" "
     , "-nf \"#FFFFFF\" "
     , "-sb \"#CCEFAC\" "
     , "-sf \"#000000\""
-    , "\""
     ]
 
 -------------------------------------------------------------------------------
@@ -57,9 +56,15 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     ]
 
 -------------------------------------------------------------------------------
+-- Startup
+--
+startup :: X ()
+startup = do
+          spawn "/usr/lib/gnome-settings-daemon/gnome-settings-daemon"
+          spawn "xrandr --output DVI-0 --primary --right-of DVI-1"
 
 main = do
-    xmproc <- spawnPipe "~/.cabal/bin/xmobar ~/.xmonad/xmobar.hs"
+    xmproc <- spawnPipe "/usr/bin/xmobar ~/.xmonad/xmobar.hs"
     xmonad $ defaultConfig
         { terminal = "/usr/bin/gnome-terminal"
         , workspaces = myWorkspaces
@@ -67,6 +72,7 @@ main = do
         , focusedBorderColor = myFocusedBorderColor
         , keys = myKeys <+> keys defaultConfig
         , layoutHook = spacing 5 $ avoidStruts $ layoutHook defaultConfig
+        , startupHook = startup
         , logHook = dynamicLogWithPP $ xmobarPP
             { ppOutput = hPutStrLn xmproc
             , ppTitle = xmobarColor xmobarTitleColor "" . shorten 100
