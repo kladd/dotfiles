@@ -18,6 +18,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'bling/vim-airline'
 Plugin 'majutsushi/tagbar'
 Plugin 'mileszs/ack.vim'
+Plugin 'toyamarinyon/vim-swift'
 
 call vundle#end()
 filetype plugin indent on       " enable detection, plugins and indenting in one step
@@ -130,9 +131,11 @@ filetype plugin on
 filetype indent on
 
 " Display tabs and trailing spaces visually
+set list listchars=tab:\|\ ,trail:·
 set wrap         "Don't wrap lines
 set linebreak    "Wrap lines at convenient points
-set nolist       "List disables linebreak
+highlight SpecialKey ctermfg=59
+"set nolist       "List disables linebreak
 
 " ================ Folds ============================
 
