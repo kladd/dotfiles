@@ -13,7 +13,7 @@ import XMonad.Util.EZConfig(additionalKeys)
 -------------------------------------------------------------------------------
 -- Colors and borders
 --
-myNormalBorderColor  = "#7c7c7c"
+myNormalBorderColor  = "#404040"
 myFocusedBorderColor = "#CEFFAC"
 
 xmobarTitleColor = "#FFB6B0"
@@ -23,7 +23,7 @@ xmobarCurrentWorkspaceColor = "#CEFFAC"
 -- Workspaces
 -- The default number of workspaces (virtual screens) and their names.
 --
-myWorkspaces = map show [1..9]
+myWorkspaces = ["1.term", "2.code", "3.web"] ++ map show [4..9]
 
 -------------------------------------------------------------------------------
 -- dmenu
@@ -61,12 +61,13 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 startup :: X ()
 startup = do
           spawn "/usr/lib/gnome-settings-daemon/gnome-settings-daemon"
-          spawn "xrandr --output DVI-0 --primary --right-of DVI-1"
+          spawn "/usr/bin/compton"
 
 main = do
     xmproc <- spawnPipe "/usr/bin/xmobar ~/.xmonad/xmobar.hs"
     xmonad $ defaultConfig
         { terminal = "/usr/bin/gnome-terminal"
+        , modMask = mod4Mask
         , workspaces = myWorkspaces
         , normalBorderColor = myNormalBorderColor
         , focusedBorderColor = myFocusedBorderColor
