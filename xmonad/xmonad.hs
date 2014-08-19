@@ -5,21 +5,17 @@ import System.IO
 import XMonad
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
-import XMonad.Layout.Spacing
 import XMonad.Layout.IndependentScreens
-import XMonad.Util.Run(spawnPipe)
+import XMonad.Layout.Spacing
 import XMonad.Util.EZConfig(additionalKeys)
+import XMonad.Util.Loggers
+import XMonad.Util.Run(spawnPipe)
 
 -------------------------------------------------------------------------------
 -- Colors and borders
 --
-<<<<<<< HEAD
 myNormalBorderColor  = "#404040"
-myFocusedBorderColor = "#CEFFAC"
-=======
-myNormalBorderColor  = "#333333"
 myFocusedBorderColor = "#7C7C7C"
->>>>>>> a857c3022ffa7bdd7d69f357f2de2abac931636f
 
 xmobarTitleColor = "#FFB6B0"
 xmobarCurrentWorkspaceColor = "#CEFFAC"
@@ -42,22 +38,30 @@ dmenu_command = concat
     , "-sf \"#000000\""
     ]
 
-dzen_command = concat
+dzen_left = concat
     [ "dzen2 "
-    , "-fn 'xft:Terminus-8' "
+    , "-fn '-*-terminus-medium-r-normal--10-*' "
     , "-ta 'l' "
     , "-w '1920' "
+    ]
+
+dzen_right = concat
+    [ "dzen2 "
+    , "-fn '-*-terminus-medium-r-normal--10-*' "
+    , "-ta 'r' "
+    , "-w '200' "
+    , "-p "
     ]
 
 -------------------------------------------------------------------------------
 -- Keybindings
 --
 myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
-    [ ((mod1Mask, xK_Return),
+    [ ((modMask, xK_Return),
         spawn $ XMonad.terminal conf)
-    , ((mod1Mask, xK_p),
+    , ((modMask, xK_p),
         spawn dmenu_command)
-    , ((mod1Mask .|. controlMask, xK_l),
+    , ((modMask, xK_l),
         spawn "slimlock")
     , ((0, 0x1008FF11),
         spawn "amixer -q set Master 5%-")
@@ -75,10 +79,10 @@ startup = do
     spawn "/usr/bin/feh --bg-scale ~/linen.png"
 
 main = do
-    h <- spawnPipe dzen_command
+    left <- spawnPipe dzen_left
+    right <- spawnPipe dzen_right
     xmonad $ defaultConfig
         { terminal = "/usr/bin/gnome-terminal"
-        , modMask = mod4Mask
         , workspaces = myWorkspaces
         , normalBorderColor = myNormalBorderColor
         , focusedBorderColor = myFocusedBorderColor
@@ -88,7 +92,7 @@ main = do
         , borderWidth = 2
         , modMask = mod4Mask
         , logHook = dynamicLogWithPP $ dzenPP
-            { ppOutput = hPutStrLn h
+            { ppOutput = hPutStrLn left
             , ppTitle = dzenColor xmobarTitleColor "" . shorten 100 . pad
             , ppCurrent = dzenColor xmobarCurrentWorkspaceColor "" . pad
             , ppVisible = dzenColor "#FFFFFF" "" . pad
@@ -96,5 +100,6 @@ main = do
             , ppHiddenNoWindows = const ""
             , ppSep = "    "
             , ppLayout = const ""
+            , ppExtras = [ date "%R" ]
             }
         }
