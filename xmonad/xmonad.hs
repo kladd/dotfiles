@@ -40,14 +40,14 @@ dmenu_command = concat
 
 dzen_left = concat
     [ "dzen2 "
-    , "-fn '-*-terminus-medium-r-normal--10-*' "
+    , "-fn 'xft:Terminus:pixelsize=12,style=italic' "
     , "-ta 'l' "
     , "-w '1920' "
     ]
 
 dzen_right = concat
     [ "dzen2 "
-    , "-fn '-*-terminus-medium-r-normal--10-*' "
+    , "-fn 'xft:Terminus:pixelsize=12,style=italic' "
     , "-ta 'r' "
     , "-w '200' "
     , "-p "
