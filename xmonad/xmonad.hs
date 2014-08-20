@@ -24,14 +24,14 @@ xmobarCurrentWorkspaceColor = "#CEFFAC"
 -- Workspaces
 -- The default number of workspaces (virtual screens) and their names.
 --
-myWorkspaces = ["1.term", "2.code", "3.web"] ++ map show [4..9]
+myWorkspaces = ["1.term", "2.code", "3.web", "4.irc", "5.vm"] ++ map show [6..9]
 
 -------------------------------------------------------------------------------
 -- dmenu
 --
 dmenu_command = concat
     [ "dmenu_run -i "
-    , "-fn \"xft:Segoe UI-10\" "
+    , "-fn \"xft:Terminus:pixelsize=11,style=italic\" "
     , "-nb \"#000000\" "
     , "-nf \"#FFFFFF\" "
     , "-sb \"#CCEFAC\" "
@@ -40,17 +40,17 @@ dmenu_command = concat
 
 dzen_left = concat
     [ "dzen2 "
-    , "-fn 'xft:Terminus:pixelsize=12,style=italic' "
+    , "-fn 'xft:Terminus:pixelsize=11,style=italic' "
     , "-ta 'l' "
     , "-w '1920' "
     ]
 
 dzen_right = concat
-    [ "dzen2 "
-    , "-fn 'xft:Terminus:pixelsize=12,style=italic' "
+    [ "i3status | dzen2 "
+    , "-fn 'xft:Terminus:pixelsize=11,style=italic' "
     , "-ta 'r' "
-    , "-w '200' "
-    , "-p "
+    , "-w '920' "
+    , "-x '1000' "
     ]
 
 -------------------------------------------------------------------------------
@@ -77,10 +77,10 @@ startup = do
     spawn "/usr/lib/gnome-settings-daemon/gnome-settings-daemon"
     spawn "/usr/bin/compton"
     spawn "/usr/bin/feh --bg-scale ~/linen.png"
+    spawn dzen_right
 
 main = do
     left <- spawnPipe dzen_left
-    right <- spawnPipe dzen_right
     xmonad $ defaultConfig
         { terminal = "/usr/bin/gnome-terminal"
         , workspaces = myWorkspaces
@@ -100,6 +100,5 @@ main = do
             , ppHiddenNoWindows = const ""
             , ppSep = "    "
             , ppLayout = const ""
-            , ppExtras = [ date "%R" ]
             }
         }
