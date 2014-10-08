@@ -12,14 +12,19 @@ set t_Co=256
 filetype off                    " force reloading *after* pathogen loaded
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-
 Plugin 'gmarik/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-surround'
+Plugin 'airblade/vim-gitgutter'
 Plugin 'bling/vim-airline'
 Plugin 'majutsushi/tagbar'
-Plugin 'mileszs/ack.vim'
+Plugin 'rking/ag.vim'
 Plugin 'toyamarinyon/vim-swift'
-
+Plugin 'tangphillip/SunburstVIM'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'nanotech/jellybeans.vim'
+Plugin 'L9'
+Plugin 'kien/ctrlp.vim'
 call vundle#end()
 filetype plugin indent on       " enable detection, plugins and indenting in one step
 
@@ -44,7 +49,8 @@ set tags=.git/tags,./tags,~/tags
 set hidden
 
 "turn on syntax highlighting
-syntax on
+syntax enable
+set background=dark
 set nocursorcolumn
 set nocursorline
 syntax sync minlines=256
@@ -53,14 +59,18 @@ let g:is_bash = 1
 " Airline configuration
 let g:airline_powerline_fonts = 1
 let g:airline_detect_paste = 1
-let g:airline_theme='simple'
+let g:airline_theme='wombat'
 
 " Change the mapleader from \ to ,
 let mapleader=","
 let maplocalleader="\\"
 
 " ================ Colors ===========================
-colorscheme ir_black
+" colorscheme ir_black
+" colorscheme grb256
+colorscheme jellybeans
+let g:solarized_termcolors=256
+highlight clear SignColumn
 
 " ================ Key bindings =====================
 
@@ -118,7 +128,7 @@ set tabstop=4
 set noexpandtab
 
 nmap <leader>m :set expandtab tabstop=2 softtabstop=2 shiftwidth=2<CR>
-nmap <leader>t :set expandtab tabstop=4 softtabstop=4 shiftwidth=4<CR>
+nmap <leader>p :set expandtab tabstop=4 softtabstop=4 shiftwidth=4<CR>
 nmap <leader>l :set expandtab tabstop=3 softtabstop=3 shiftwidth=3<CR>
 nmap <leader>k :set noexpandtab tabstop=8 softtabstop=8 shiftwidth=8<CR>
 
@@ -126,16 +136,17 @@ autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
 autocmd Filetype c setlocal noexpandtab ts=8 sts=8 sw=8
 autocmd Filetype php setlocal noexpandtab ts=4 sts=4 sw=4
 autocmd Filetype haskell setlocal expandtab
+" autocmd Syntax * syn match ExtraWhitespace /\s\+$\| \+\ze\t/
 
 filetype plugin on
 filetype indent on
 
 " Display tabs and trailing spaces visually
-set list listchars=tab:\|\ ,trail:·
+set list listchars=tab:\»\ ,trail:·
 set wrap         "Don't wrap lines
 set linebreak    "Wrap lines at convenient points
 highlight SpecialKey ctermfg=59
-"set nolist       "List disables linebreak
+" set nolist       "List disables linebreak
 
 " ================ Folds ============================
 
