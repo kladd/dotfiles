@@ -3,7 +3,7 @@
 " Use Vim settings, rather then Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
 set nocompatible
-set laststatus=2
+" set laststatus=2
 set encoding=utf-8
 set t_Co=256
 
@@ -16,13 +16,9 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
 Plugin 'airblade/vim-gitgutter'
-Plugin 'bling/vim-airline'
 Plugin 'majutsushi/tagbar'
 Plugin 'rking/ag.vim'
 Plugin 'toyamarinyon/vim-swift'
-Plugin 'tangphillip/SunburstVIM'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'nanotech/jellybeans.vim'
 Plugin 'L9'
 Plugin 'kien/ctrlp.vim'
 call vundle#end()
@@ -59,7 +55,7 @@ let g:is_bash = 1
 " Airline configuration
 let g:airline_powerline_fonts = 1
 let g:airline_detect_paste = 1
-let g:airline_theme='wombat'
+" let g:airline_theme='simple'
 
 " Change the mapleader from \ to ,
 let mapleader=","
@@ -68,7 +64,6 @@ let maplocalleader="\\"
 " ================ Colors ===========================
 " colorscheme ir_black
 " colorscheme grb256
-colorscheme jellybeans
 let g:solarized_termcolors=256
 highlight clear SignColumn
 
@@ -142,7 +137,7 @@ filetype plugin on
 filetype indent on
 
 " Display tabs and trailing spaces visually
-set list listchars=tab:\»\ ,trail:·
+set list listchars=tab:\|\ ,trail:·
 set wrap         "Don't wrap lines
 set linebreak    "Wrap lines at convenient points
 highlight SpecialKey ctermfg=59
