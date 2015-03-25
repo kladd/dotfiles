@@ -5,6 +5,7 @@
 import XMonad
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks (avoidStruts)
+import XMonad.Hooks.SetWMName
 import XMonad.Layout.Spacing (spacing)
 import XMonad.Util.Run (spawnPipe)
 import XMonad.Util.SpawnOnce
@@ -12,7 +13,7 @@ import System.IO
 
 import qualified Data.Map as M
 
-myTerminal = "/usr/bin/urxvt"
+myTerminal = "/usr/bin/gnome-terminal"
 
 myFocusFollowsMouse = True
 
@@ -51,9 +52,10 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
 myStartupHook = do
     spawnOnce "dunst"
-    spawnOnce "$HOME/bin/wallpaper.sh"
+    spawnOnce "/usr/bin/feh --bg-tile $HOME/Pictures/bg.png"
     spawnOnce "/usr/lib/gnome-settings-daemon/gnome-settings-daemon"
     spawnOnce "compton -c -b -e 0.8 -t -8 -l -9 -r 6 -o 0.7 -m 1.0"
+    setWMName "LG3D"
 
 myLayoutHook = spacing 16 $ avoidStruts $ layoutHook defaultConfig
 
