@@ -4,6 +4,7 @@
 
 if which git > /dev/null; then
     source $PLUGIN_DIR/git-completion.bash
+    source $PLUGIN_DIR/git-prompt.sh
 
     alias g='git'
 
