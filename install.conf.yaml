@@ -6,6 +6,7 @@
     ~/.bash_prompt: bash_prompt
     ~/.bashrc: bashrc
     ~/.dotfiles.d: dotfiles.d/
+    ~/.emacs: emacs
     ~/.gitconfig: gitconfig
     ~/.gittemplate: gittemplate/
     ~/.vim: vim/
