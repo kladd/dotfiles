@@ -5,6 +5,7 @@
     ~/.bash_profile: bash_profile
     ~/.bash_prompt: bash_prompt
     ~/.bashrc: bashrc
+    ~/.config: config/
     ~/.dotfiles.d: dotfiles.d/
     ~/.emacs: emacs
     ~/.gitconfig: gitconfig
