@@ -94,8 +94,15 @@ export HISTCONTROL=ignoredups
 complete -cf sudo
 
 prepend_path $HOME/bin
-prepend_path $HOME/android/sdk/tools
-prepend_path $HOME/android/sdk/platform-tools
+prepend_path $HOME/.cargo/bin
+
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
+fi
 
 # Import plugins
 for plugin in ${plugins[@]}; do

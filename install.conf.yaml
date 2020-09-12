@@ -5,7 +5,9 @@
     ~/.bash_profile: bash_profile
     ~/.bash_prompt: bash_prompt
     ~/.bashrc: bashrc
-    ~/.config: config/
+    ~/.config/alacritty: config/alacritty
+    ~/.config/bspwm: config/bspwm
+    ~/.config/sxhkd: config/sxhkd
     ~/.dotfiles.d: dotfiles.d/
     ~/.emacs: emacs
     ~/.gitconfig: gitconfig
