@@ -1,0 +1,44 @@
+window:
+  padding:
+    x: 8
+    y: 8
+  title: terminal
+  dynamic_title: true
+  decorations_theme_variant: dark
+font:
+  normal:
+    family: "Berkeley Mono"
+    style: Regular
+  bold:
+    family: "Berkeley Mono"
+    style: Bold
+  italic:
+    family: "Berkeley Mono"
+    style: Italic
+  bold_italic:
+    family: "Berkeley Mono"
+    style: Bold Italic
+  size: 11.0
+colors:
+  primary:
+    background: "#000000" # "#1d1f21"
+    foreground: "#f6f6f6"
+  cursor:
+    text: "#1d1f21"
+    cursor: "#5dd8ff"
+  selection:
+    foreground: "#ffffff"
+    background: "#323539"
+  normal:
+    black: "#000000"
+    red: "#fc6a5d"
+    green: "#90b080"
+    yellow: "#d0bf68"
+    blue: "#4dd8ff"
+    magenta: "#d0a8ff"
+    cyan: "#8abeb7"
+    whtie: "#ffffff"
+cursor:
+  style:
+    shape: block
+    blinking: on

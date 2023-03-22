@@ -1,0 +1,6 @@
+[alias]
+	s = status -s
+	tags = tag -l
+
+[format]
+	pretty = oneline
