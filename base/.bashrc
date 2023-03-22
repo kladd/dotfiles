@@ -16,16 +16,16 @@ if which git > /dev/null; then
     alias gc='git commit -v'
     alias gco='git checkout'
 
-    __git_complete g __git_main
-    __git_complete gco _git_checkout
+    [[ -f $HOME/.config/git/git-prompt.sh ]] && \
+	. $HOME/.config/git/git-prompt.sh
+    [[ -f $HOME/.config/git/git-completion.bash ]] && \
+	. $HOME/.config/git/git-completion.bash
+
+    ___git_complete g __git_main
+    ___git_complete gco _git_checkout
 
     export GIT_PS1_SHOWDIRTYSTATE=true
     export GIT_PS1_SHOWUNTRACKEDFILES=true
-
-    [[ -f /usr/share/git/completion/git-prompt.sh ]] && \
-        . /usr/share/git/completion/git-prompt.sh
-    [[ -f /usr/share/git-core/contrib/completion/git-prompt.sh ]] && \
-        . /usr/share/git-core/contrib/completion/git-prompt.sh
 
     PS1="[\[\e[01;32m\]\u@\h\[\e[00m\] \[\e[01;34m\]\W\[\e[00m\]\[\e[0;33m\]"'$(__git_ps1 " %s")'"\[\e[0m\]]\$ "
 else
