@@ -14,6 +14,7 @@ export HISTIGNORE="clear:bg:fg:cd:cd -:cd ..:exit:date:w:* --help:ls"
 if which git > /dev/null; then
     alias g='git'
     alias gc='git commit -v'
+    alias gl='git log --decorate --abbrev-commit'
     alias gco='git checkout'
 
     [[ -f $HOME/.config/git/git-prompt.sh ]] && \
