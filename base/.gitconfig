@@ -1,6 +1,7 @@
 [alias]
 	s = status -s
 	tags = tag -l
-
+[core]
+	editor = vim
 [format]
 	pretty = oneline
