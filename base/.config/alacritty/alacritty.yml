@@ -22,7 +22,7 @@ font:
 colors:
   primary:
     background: "#000000" # "#1d1f21"
-    foreground: "#f6f6f6"
+    foreground: "#f4f4f4"
   cursor:
     text: "#1d1f21"
     cursor: "#5dd8ff"
@@ -31,13 +31,31 @@ colors:
     background: "#323539"
   normal:
     black: "#000000"
-    red: "#fc6a5d"
-    green: "#90b080"
-    yellow: "#d0bf68"
-    blue: "#4dd8ff"
-    magenta: "#d0a8ff"
-    cyan: "#8abeb7"
-    whtie: "#ffffff"
+    red: "#ff8059"
+    green: "#44bc44"
+    yellow: "#d0bc00"
+    blue: "#2fafff"
+    magenta: "#feacd0"
+    cyan: "#00d3d0"
+    white: "#f4f4f4"
+  bright:
+    black: "#646464"
+    red: "#fe6060"
+    green: "#4fe42f"
+    yellow: "#f0dd60"
+    blue: "#4fafff"
+    magenta: "#ff62d4"
+    cyan: "#3fdfd0"
+    white: "#ffffff"
+  dim:
+    black: "#382f27"
+    red: "#ffa0a0"
+    green: "#78bf78"
+    yellow: "#cabf77"
+    blue: "#82b0ec"
+    magenta: "#e0b2d6"
+    cyan: "#90c4ed"
+    white: "#bfc0c4"
 cursor:
   style:
     shape: block
