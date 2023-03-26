@@ -5,7 +5,8 @@
       cursor-in-non-selected-windows nil
       confirm-nonexistent-file-or-buffer nil
       completion-styles '(basic substring)
-      tab-width 8)
+      tab-width 8
+      vc-follow-symlinks t)
 
 (setq gc-cons-threshold (* 1024 1024 1024))
 (scroll-bar-mode -1)
