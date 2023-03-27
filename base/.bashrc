@@ -37,6 +37,11 @@ complete -cf sudo
 alias sudo='sudo -E'
 alias ls='ls --color=auto'
 alias ssh='TERM=xterm-256color ssh'
+alias ec='emacsclient -c'
+alias vim='emacsclient -t'
+
+export EDITOR='emacsclient -t'
+export VISUAL='emacsclient -t'
 
 function emacs()
 {
