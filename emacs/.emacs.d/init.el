@@ -118,6 +118,16 @@
 	completion-category-defaults nil
 	completion-category-overrides '((file (styles . (partial-completion))))))
 
+;; Sidebar
+(use-package dired-sidebar
+  :init
+  (setq dired-sidebar-no-delete-other-windows t
+	dired-sidebar-width 25
+	dired-sidebar-pop-to-sidebar-on-toggle-open nil))
+(evil-global-set-key 'motion (kbd "M-1")
+		     'dired-sidebar-toggle-sidebar)
+(add-hook 'dired-mode-hook (lambda () (display-line-numbers-mode 0)))
+
 ;; Syntax
 (setq treesit-language-source-alist
       '((c . ("https://github.com/tree-sitter/tree-sitter-c"))
