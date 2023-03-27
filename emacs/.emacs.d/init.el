@@ -26,7 +26,7 @@
 (set-language-environment   'utf-8)
 
 (setq x-underline-at-descent-line t
-      window-divider-default-right-width 12
+      window-divider-default-right-width 2
       window-divider-default-paces 'right-only)
 (window-divider-mode 1)
 
