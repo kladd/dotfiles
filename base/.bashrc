@@ -42,8 +42,3 @@ alias vim='emacsclient -t'
 
 export EDITOR='emacsclient -t'
 export VISUAL='emacsclient -t'
-
-function emacs()
-{
-    (nohup emacsclient -c "$@" > /dev/null 2>&1 &) > /dev/null
-}
