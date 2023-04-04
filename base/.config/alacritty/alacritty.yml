@@ -18,10 +18,10 @@ font:
   bold_italic:
     family: "Berkeley Mono"
     style: Bold Italic
-  size: 11.0
+  size: 12.0
 colors:
   primary:
-    background: "#000000" # "#012456" "#1d1f21"
+    background: "#000000" # "#012456" # "#1d1f21"
     foreground: "#CCCCCC"
   cursor:
     text: "#1d1f21"
@@ -48,6 +48,7 @@ colors:
     cyan: "#61D6D6"
     white: "#F2F2F2"
 cursor:
+  thickness: 0.4
   style:
-    shape: block
+    shape: underline
     blinking: on
