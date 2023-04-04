@@ -37,8 +37,11 @@
       scroll-margin 4)
 
 ;; Set a backup directory I'll never look at.
-(setq backup-directory-alist `(("." . ,(expand-file-name ".backups"
-							 user-emacs-directory))))
+(setq backup-directory-alist
+      `(("." . ,(expand-file-name ".backups" user-emacs-directory))))
+(setq auto-save-file-name-transforms
+      `((".*" ,temporary-file-directory t)))
+
 ;; Write custom-* stuff not in this file.
 (setq-default custom-file (expand-file-name ".custom.el" user-emacs-directory))
 (when (file-exists-p custom-file)
