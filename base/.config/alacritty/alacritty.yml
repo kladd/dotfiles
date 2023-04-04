@@ -22,40 +22,31 @@ font:
 colors:
   primary:
     background: "#000000" # "#1d1f21"
-    foreground: "#f4f4f4"
+    foreground: "#CCCCCC"
   cursor:
     text: "#1d1f21"
-    cursor: "#78bf78" # "#5dd8ff"
+    cursor: "#FFFFFF" # "#5dd8ff"
   selection:
     foreground: "#ffffff"
     background: "#323539"
   normal:
     black: "#000000"
-    red: "#ff8059"
-    green: "#44bc44"
-    yellow: "#d0bc00"
-    blue: "#2fafff"
-    magenta: "#feacd0"
-    cyan: "#00d3d0"
-    white: "#f4f4f4"
+    red: "#C50F1F"
+    green: "#13A10E"
+    yellow: "#C19C00"
+    blue: "#0037DA"
+    magenta: "#881798"
+    cyan: "#3A96DD"
+    white: "#CCCCCC"
   bright:
-    black: "#646464"
-    red: "#fe6060"
-    green: "#4fe42f"
-    yellow: "#f0dd60"
-    blue: "#4fafff"
-    magenta: "#ff62d4"
-    cyan: "#3fdfd0"
-    white: "#ffffff"
-  dim:
-    black: "#382f27"
-    red: "#ffa0a0"
-    green: "#78bf78"
-    yellow: "#cabf77"
-    blue: "#82b0ec"
-    magenta: "#e0b2d6"
-    cyan: "#90c4ed"
-    white: "#bfc0c4"
+    black: "#767676"
+    red: "#E74856"
+    green: "#16C60C"
+    yellow: "#F9F1A5"
+    blue: "#3B78FF"
+    magenta: "#B4009E"
+    cyan: "#61D6D6"
+    white: "#F2F2F2"
 cursor:
   style:
     shape: block
