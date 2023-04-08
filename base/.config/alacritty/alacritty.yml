@@ -25,7 +25,7 @@ colors:
     foreground: "#CCCCCC"
   cursor:
     text: "#1d1f21"
-    cursor: "#FFFFFF" # "#5dd8ff"
+    cursor: "#F9F1A5" # "#5dd8ff"
   selection:
     foreground: "#ffffff"
     background: "#323539"
