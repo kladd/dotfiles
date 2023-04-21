@@ -38,8 +38,7 @@ alias sudo='sudo -E'
 alias ls='ls --color=auto'
 alias ssh='TERM=xterm-256color ssh'
 alias ec='emacsclient -c'
-alias vim='emacsclient -t'
 
-export EDITOR='emacsclient -t'
-export VISUAL='emacsclient -t'
-export PATH="$HOME/.local/share/JetBrains/Toolbox/scripts:$PATH"
+export PATH="$HOME/.local/bin:$HOME/bin:$HOME/.local/share/JetBrains/Toolbox/scripts:$PATH"
+
+. "$HOME/.cargo/env"
