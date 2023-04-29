@@ -4,7 +4,7 @@ window:
     y: 8
   title: terminal
   dynamic_title: true
-  decorations_theme_variant: dark
+  decorations_theme_variant: Dark
 font:
   normal:
     family: "Berkeley Mono"
@@ -48,7 +48,9 @@ colors:
     cyan: "#61D6D6"
     white: "#F2F2F2"
 cursor:
+  blinking: always
   thickness: 0.4
+  unfocused_hollow: false
   style:
     shape: underline
     blinking: on
