@@ -1,0 +1,8 @@
+theme = "self"
+
+[editor.file-picker]
+hidden = false
+
+[keys.normal]
+x = "delete_selection"
+esc = ["collapse_selection"]
