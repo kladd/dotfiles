@@ -6,9 +6,9 @@
 shopt -s checkwinsize;
 shopt -s histappend;
 
-export HISTSIZE=5000
+export HISTSIZE=9000
 export HISTCONTROL=ignoredups
-export HISTIGNORE="clear:bg:fg:cd:cd -:cd ..:exit:date:w:* --help:ls"
+export HISTIGNORE="clear:bg:fg:cd:cd -:cd ..:exit:date:w:ls"
 
 # git
 if which git > /dev/null; then
