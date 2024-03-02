@@ -1,113 +1,59 @@
-(setq package-enable-at-startup nil
-      inhibit-startup-message t
-      frame-resize-pixelwise t
-      package-native-compile t
-      cursor-in-non-selected-windows nil
-      confirm-nonexistent-file-or-buffer nil
-      completion-styles '(basic substring)
-      tab-width 8
-      vc-follow-symlinks t)
+(require 'package)
+(require 'use-package)
 
-(setq gc-cons-threshold (* 1024 1024 1024))
-(scroll-bar-mode -1)
-(tool-bar-mode -1)
-(tooltip-mode -1)
-(set-fringe-mode 10)
-(menu-bar-mode -1)
-(column-number-mode)
-(global-display-line-numbers-mode t)
-(global-auto-revert-mode 1)
-(electric-pair-mode 1)
-(fset 'yes-or-no-p 'y-or-n-p)
-(prefer-coding-system       'utf-8)
-(set-default-coding-systems 'utf-8)
-(set-terminal-coding-system 'utf-8)
-(set-keyboard-coding-system 'utf-8)
-(set-language-environment   'utf-8)
-
-(setq x-underline-at-descent-line t
-      window-divider-default-right-width 2
-      window-divider-default-paces 'right-only)
-(window-divider-mode 1)
-
-;; Emacs 29 scrolling
-(pixel-scroll-precision-mode 1)
-(setq pixel-scroll-precision-large-scroll-height 10.0
-      scroll-conservatively 1000
-      scroll-margin 4)
-
-;; Set a backup directory I'll never look at.
-(setq backup-directory-alist
-      `(("." . ,(expand-file-name ".backups" user-emacs-directory))))
-(setq auto-save-file-name-transforms
-      `((".*" ,temporary-file-directory t)))
-
-;; Write custom-* stuff not in this file.
-(setq-default custom-file (expand-file-name ".custom.el" user-emacs-directory))
-(when (file-exists-p custom-file)
-  (load custom-file))
-
-(set-face-attribute 'default nil
-		    :font "Berkeley Mono"
-		    :height 110)
-
-(setq modus-themes-mode-line '(accented borderless (padding 4)))
-(setq modus-themes-bold-constructs t
-      modus-themes-italic-constructs t)
-(setq modus-themes-operandi-color-overrides
-      '((bg-active-accent . "#f8f8f8")
-	(fg-window-divider-inner . "#f8f8f8")
-	(fg-window-divider-outer . "#f8f8f8")))
-(load-theme 'modus-vivendi t)
-
-(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
-
-(setq package-archives '(("melpa"  . "https://melpa.org/packages/")
-                         ("gnu"    . "https://elpa.gnu.org/packages/")
-                         ("nongnu" . "https://elpa.nongnu.org/nongnu/"))
-      use-package-always-ensure t)
 (package-initialize)
 (unless package-archive-contents
   (package-refresh-contents))
-(require 'use-package-ensure)
 
-(use-package evil
-  :ensure t
+(use-package emacs
   :init
-  (setq evil-want-C-i-jump nil)
+  (setq package-archives '(("melpa" . "https://melpa.org/packages/")
+			   ("gnu" . "https://elpa.gnu.org/packages/")
+			   ("nongnu" . "https://elpa.nongnu.org/nongnu/"))
+	use-package-always-ensure t)
+  (setq make-backup-files nil
+	create-lockfiles nil
+	custom-file (make-temp-file "emacs-custom-"))
+  (setq vc-follow-symlinks t)
+  (setq initial-buffer-choice t)
+  (setq modus-themes-mode-line '(accented borderless)
+	modus-themes-mixed-fonts t
+	modus-themes-variable-pitch-ui t
+	modus-themes-bold-constructs t
+	modus-themes-italic-constructs t)
+  (setq x-underline-at-descent-line nil)
+  (setq scroll-conservatively 100
+	scroll-margin 4)
+  (setq treesit-language-source-alist
+	'((rust . ("https://github.com/tree-sitter/tree-sitter-rust"))
+	  (toml . ("https://github.com/tree-sitter/tree-sitter-toml"))
+	  (make . ("https://github.com/alemuller/tree-sitter-make"))
+	  (json . ("https://github.com/tree-sitter/tree-sitter-json"))))
   :config
-  (evil-mode 1)
-  (evil-global-set-key 'motion "j" 'evil-next-visual-line)
-  (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
-  (evil-define-key 'motion org-mode-map (kbd "C-\[") 'org-open-at-point))
+  (load-theme 'modus-vivendi t)
+  (electric-pair-mode 1)
+  (scroll-bar-mode -1)
+  (menu-bar-mode -1)
+  (tool-bar-mode -1)
+  (global-auto-revert-mode 1)
+  (column-number-mode 1)
+  (global-display-line-numbers-mode 1)
+  (keymap-set global-map "<escape>" 'keyboard-escape-quit)
+  (set-face-attribute 'default nil
+		      :font "Berkeley Mono" :height 100)
+  (set-face-attribute 'fixed-pitch nil
+		      :font "Berkeley Mono" :height 100)
+  (when (eq system-type 'gnu/linux)
+    (set-face-attribute 'variable-pitch nil
+			:font "Helvetica" :height 80)
+    (pixel-scroll-precision-mode 1)))
+    
+(use-package vertico
+  :config (vertico-mode))
 
-(use-package org
-  :init (setq org-hide-emphasis-markers t)
-  :hook (org-mode . kl/org-mode-hook))
+(use-package marginalia
+  :config (marginalia-mode))
 
-(use-package org-roam
-  :custom
-  (org-roam-directory "~/log")
-  (org-roam-completion-everywhere t)
-  :bind (("C-c l" . org-roam-buffer-toggle)
-         ("C-c f" . org-roam-node-find)
-         ("C-c i" . kl/org-roam-insert-imm)
-         :map org-mode-map
-         ("C-c p" . completion-at-point))
-  :bind-keymap ("C-c d" . org-roam-dailies-map)
-  :config
-  (require 'org-roam-dailies)
-  (org-roam-setup))
-
-(require 'org-tempo)
-(add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
-(add-to-list 'org-structure-template-alist '("sh" . "src shell"))
-(add-to-list 'org-structure-template-alist '("c" . "src c"))
-
-(use-package visual-fill-column
-  :hook (org-mode . (lambda () (kl/visual-fill 80))))
-
-;; Auto completion
 (use-package corfu
   :custom
   (corfu-auto t)
@@ -115,69 +61,100 @@
   (corfu-auto-prefix 2)
   :init (global-corfu-mode))
 
+(use-package spacious-padding
+  :config (spacious-padding-mode 1))
+
 (use-package orderless
+  :init (setq completion-styles '(orderless basic)))
+
+(use-package which-key
   :init
-  (setq completion-styles '(orderless basic)
-	completion-category-defaults nil
-	completion-category-overrides '((file (styles . (partial-completion))))))
+  (setq which-key-idle-delay 400
+	which-key-separator "  " 
+	which-key-add-column-padding 1
+	which-key-max-display-columns 3
+	which-key-max-description-length 40)
+  :config
+  (which-key-mode))
 
-;; Sidebar
-(use-package dired-sidebar
+(use-package org
+  :init (setq org-hide-emphasis-markers t)
+  :config
+  (set-face-attribute 'org-default nil
+		      :font "Iosevka Comfy Motion Duo"
+		      :height 110)
+  :hook (org-mode . kl/org-mode-hook))
+
+(use-package org-roam
+  :custom
+  (org-roam-directory "~/log")
+  (org-roam-completion-everywhere t)
+  :bind (("C-c i" . kl/org-roam-insert-imm))
+  :config
+  (org-roam-setup))
+
+(use-package visual-fill-column
   :init
-  (setq dired-sidebar-no-delete-other-windows t
-	dired-sidebar-width 25
-	dired-sidebar-pop-to-sidebar-on-toggle-open nil))
-(evil-global-set-key 'motion (kbd "M-1")
-		     'dired-sidebar-toggle-sidebar)
-(add-hook 'dired-mode-hook (lambda () (display-line-numbers-mode 0)))
+  (setq visual-fill-column-width 100
+	visual-fill-column-center-text t))
 
-;; Syntax
-(setq treesit-language-source-alist
-      '((c . ("https://github.com/tree-sitter/tree-sitter-c"))
-	(json . ("https://github.com/tree-sitter/tree-sitter-json"))
-	(make . ("https://github.com/alemuller/tree-sitter-make"))
-	(rust . ("https://github.com/tree-sitter/tree-sitter-rust"))
-	(toml . ("https://github.com/tree-sitter/tree-sitter-toml"))))
-
-;; Rust IDE
 (use-package flycheck)
-(setq rust-format-on-save t
-      rust-rustfmt-switches '("+nightly --all"))
-(add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-ts-mode))
-(add-hook 'rust-ts-mode-hook 'eglot-ensure)
-(add-hook 'before-save-hook 'eglot-format)
+(use-package rust-ts-mode
+  :init
+  (setq rust-format-on-save t
+	rust-rustfmt-switches '("+nightly --all")
+	eldoc-echo-area-use-multiline-p nil)
+  (setq exec-path (append exec-path (list (expand-file-name "~/.cargo/bin"))))
+  :config
+  (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-ts-mode))
+  (add-hook 'rust-ts-mode-hook 'eglot-ensure)
+  (add-hook 'before-save-hook 'eglot-format))
 
-(defun kl/install-langs ()
-  (let ((langs (mapcar 'car treesit-language-source-alist)))
-    (dolist (lang langs)
-      (treesit-install-language-grammar lang))))
+(use-package markdown-mode
+  :mode ("README\\.md\\'" . gfm-mode))
 
-(defun kl/visual-fill (width)
-  (setq visual-fill-column-width width
-        visual-fill-column-center-text t)
-  (visual-fill-column-mode 1))
+(use-package evil-leader
+  :config
+  (require 'org-roam-dailies)
+  (evil-leader/set-leader "<SPC>")
+  (evil-leader/set-key
+    "f" #'project-find-file
+    "b" #'switch-to-buffer
+    "d" org-roam-dailies-map)
+  (global-evil-leader-mode))
 
-(defun kl/org-mode-hook ()
-  (setq-local electric-pair-inhibit-predicate
-              `(lambda (c) (if (char-equal c ?<) t
-                             (,electric-pair-inhibit-predicate c))))
+(use-package evil
+  :init
+  (setq evil-want-C-i-jump nil)
+  (setq evil-undo-system 'undo-redo)
+  :config
+  (evil-define-key 'motion org-mode-map (kbd "C-\]")
+    'org-open-at-point)
+  (evil-global-set-key 'motion "j" 'evil-next-visual-line)
+  (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
+  (evil-mode 1))
+
+(defun kl/org-mode-hook()
   (org-indent-mode)
   (visual-line-mode 1)
-  (display-line-numbers-mode 0))
+  (display-line-numbers-mode 0)
+  (kl/org-variable-pitch-mode 1)
+  (visual-fill-column-mode 1))
+
+(defun kl/org-variable-pitch-mode (&optional arg)
+  (require 'face-remap)
+  (buffer-face-mode-invoke 'org-default (or arg t)))
 
 (defun kl/org-roam-insert-imm (arg &rest args)
   (interactive "P")
   (let ((args (push arg args))
-        (org-roam-capture-templates (list (append (car org-roam-capture-templates)
-                                                  '(:immediate-finish t)))))
-    (apply #'org-roam-node-insert args))) 
+	(org-roam-capture-templates
+	 (list (append (car org-roam-capture-templates)
+		       '(:immediate-finish t)))))
+    (apply #'org-roam-node-insert args)))
 
-(defun kl/set-emacs-frames (variant)
-  "Sets GTK frame variant"
-  (dolist (frame (frame-list))
-    (let* ((window-id (frame-parameter frame 'outer-window-id))
-	   (id (string-to-number window-id))
-	   (cmd (format "xprop -id 0x%x -f _GTK_THEME_VARIANT 8u -set _GTK_THEME_VARIANT \"%s\""
-			id variant)))
-      (call-process-shell-command cmd))))
-(kl/set-emacs-frames "dark")
+(defun kl/compile-treesit-grammars ()
+  (interactive)
+  (let ((langs (mapcar 'car treesit-language-source-alist)))
+    (dolist (lang langs)
+      (treesit-install-language-grammar lang))))
