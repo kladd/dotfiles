@@ -29,6 +29,7 @@
 	  (toml . ("https://github.com/tree-sitter/tree-sitter-toml"))
 	  (make . ("https://github.com/alemuller/tree-sitter-make"))
 	  (json . ("https://github.com/tree-sitter/tree-sitter-json"))))
+  (setq frame-title-format '("%b - " invocation-name "@" system-name))
   :config
   (load-theme 'modus-vivendi t)
   (electric-pair-mode 1)
@@ -99,6 +100,7 @@
 	visual-fill-column-center-text t))
 
 (use-package flycheck)
+
 (use-package rust-ts-mode
   :init
   (setq rust-format-on-save t
@@ -126,12 +128,12 @@
 (use-package evil
   :init
   (setq evil-want-C-i-jump nil)
-  (setq evil-undo-system 'undo-redo)
   :config
   (evil-define-key 'motion org-mode-map (kbd "C-\]")
     'org-open-at-point)
   (evil-global-set-key 'motion "j" 'evil-next-visual-line)
   (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
+  (evil-set-undo-system 'undo-redo)
   (evil-mode 1))
 
 (defun kl/org-mode-hook()
