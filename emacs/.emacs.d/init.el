@@ -124,6 +124,7 @@
   (evil-leader/set-key
     "f" #'project-find-file
     "b" #'switch-to-buffer
+    "k" #'kill-buffer
     "d" org-roam-dailies-map)
   (global-evil-leader-mode))
 
