@@ -101,6 +101,9 @@
 
 (use-package flycheck)
 
+(use-package pulsar
+  :config (pulsar-global-mode 1))
+
 (use-package rust-ts-mode
   :init
   (setq rust-format-on-save t
