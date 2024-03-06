@@ -112,8 +112,7 @@
   (setq exec-path (append exec-path (list (expand-file-name "~/.cargo/bin"))))
   :config
   (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-ts-mode))
-  (add-hook 'rust-ts-mode-hook 'eglot-ensure)
-  (add-hook 'before-save-hook 'eglot-format))
+  (add-hook 'rust-ts-mode-hook 'eglot-ensure))
 
 (use-package markdown-mode
   :mode ("README\\.md\\'" . gfm-mode))
