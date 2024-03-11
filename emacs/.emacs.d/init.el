@@ -33,6 +33,7 @@
 	  (make . ("https://github.com/alemuller/tree-sitter-make"))
 	  (json . ("https://github.com/tree-sitter/tree-sitter-json"))))
   (setq frame-title-format '("%b - " invocation-name "@" system-name))
+  (setq major-mode-remap-alist '((python-mode . python-ts-mode)))
   :config
   (load-theme 'modus-vivendi t)
   (electric-pair-mode 1)
@@ -98,17 +99,21 @@
   :mode "\\.rs\\'"
   :hook ((rust-mode . eglot-ensure)
 	 (rust-mode . kl/rust-mode-hook))
-  :bind (("<M-return>" . eglot-code-actions))
   :init (setq rust-mode-treesitter-derive t
 	      rust-format-on-save t
 	      rust-rustfmt-switches '("+nightly")
 	      eldoc-echo-area-use-multiline-p nil))
+
+(use-package python-mode
+  :mode "\\.py\\'"
+  :hook ((python-ts-mode . eglot-ensure)))
 
 (use-package flymake-clippy
   :hook (rust-mode . flymake-clippy-setup-backend))
 
 (use-package eglot
   :hook (eglot-managed-mode . kl/eglot-managed-mode-hook)
+  :bind (("<M-return>" . eglot-code-actions))
   :config (add-to-list 'eglot-stay-out-of 'flymake))
 
 (use-package markdown-mode
