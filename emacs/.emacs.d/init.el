@@ -5,6 +5,8 @@
 (unless package-archive-contents
   (package-refresh-contents))
 
+(load (locate-user-emacs-file "kl.el") :no-message)
+
 (use-package emacs
   :init
   (setq package-archives '(("melpa" . "https://melpa.org/packages/")
@@ -13,6 +15,7 @@
 	use-package-always-ensure t)
   (setq make-backup-files nil
 	create-lockfiles nil
+	auto-save-default nil
 	custom-file (make-temp-file "emacs-custom-"))
   (setq vc-follow-symlinks t)
   (setq initial-buffer-choice t)
@@ -40,14 +43,9 @@
   (column-number-mode 1)
   (global-display-line-numbers-mode 1)
   (keymap-set global-map "<escape>" 'keyboard-escape-quit)
-  (set-face-attribute 'default nil
-		      :font "Berkeley Mono" :height 100)
-  (set-face-attribute 'fixed-pitch nil
-		      :font "Berkeley Mono" :height 100)
-  (when (eq system-type 'gnu/linux)
-    (set-face-attribute 'variable-pitch nil
-			:font "Helvetica" :height 80)
-    (pixel-scroll-precision-mode 1)))
+  (unless (eq system-type 'darwin)
+    (pixel-scroll-precision-mode 1))
+  (kl/set-faces))
     
 (use-package vertico
   :config (vertico-mode))
@@ -80,10 +78,7 @@
 
 (use-package org
   :init (setq org-hide-emphasis-markers t)
-  :config
-  (set-face-attribute 'org-default nil
-		      :font "Iosevka Comfy Motion Duo"
-		      :height 110)
+  :config (kl/org-set-faces)
   :hook (org-mode . kl/org-mode-hook))
 
 (use-package org-roam
@@ -99,34 +94,41 @@
   (setq visual-fill-column-width 100
 	visual-fill-column-center-text t))
 
-(use-package flycheck)
+(use-package rust-mode
+  :mode "\\.rs\\'"
+  :hook ((rust-mode . eglot-ensure)
+	 (rust-mode . kl/rust-mode-hook))
+  :bind (("<M-return>" . eglot-code-actions))
+  :init (setq rust-mode-treesitter-derive t
+	      rust-format-on-save t
+	      rust-rustfmt-switches '("+nightly")
+	      eldoc-echo-area-use-multiline-p nil))
 
-(use-package pulsar
-  :config (pulsar-global-mode 1))
+(use-package flymake-clippy
+  :hook (rust-mode . flymake-clippy-setup-backend))
 
-(use-package rust-ts-mode
-  :init
-  (setq rust-format-on-save t
-	rust-rustfmt-switches '("+nightly --all")
-	eldoc-echo-area-use-multiline-p nil)
-  (setq exec-path (append exec-path (list (expand-file-name "~/.cargo/bin"))))
-  :config
-  (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-ts-mode))
-  (add-hook 'rust-ts-mode-hook 'eglot-ensure))
+(use-package eglot
+  :hook (eglot-managed-mode . kl/eglot-managed-mode-hook)
+  :config (add-to-list 'eglot-stay-out-of 'flymake))
 
 (use-package markdown-mode
   :mode ("README\\.md\\'" . gfm-mode))
 
-(use-package evil-leader
+(use-package general
   :config
+  (general-auto-unbind-keys)
+  (general-evil-setup t)
   (require 'org-roam-dailies)
-  (evil-leader/set-leader "<SPC>")
-  (evil-leader/set-key
-    "f" #'project-find-file
-    "b" #'switch-to-buffer
-    "k" #'kill-buffer
-    "d" org-roam-dailies-map)
-  (global-evil-leader-mode))
+  (general-create-definer kl/leader-keys :prefix "SPC"))
+
+(kl/leader-keys
+  :states '(normal visual)
+  :keymaps 'override
+  "f" #'project-find-file
+  "b" #'switch-to-buffer
+  "k" #'kill-buffer
+  "l" #'dired
+  "d" org-roam-dailies-map)
 
 (use-package evil
   :init
@@ -138,28 +140,3 @@
   (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
   (evil-set-undo-system 'undo-redo)
   (evil-mode 1))
-
-(defun kl/org-mode-hook()
-  (org-indent-mode)
-  (visual-line-mode 1)
-  (display-line-numbers-mode 0)
-  (kl/org-variable-pitch-mode 1)
-  (visual-fill-column-mode 1))
-
-(defun kl/org-variable-pitch-mode (&optional arg)
-  (require 'face-remap)
-  (buffer-face-mode-invoke 'org-default (or arg t)))
-
-(defun kl/org-roam-insert-imm (arg &rest args)
-  (interactive "P")
-  (let ((args (push arg args))
-	(org-roam-capture-templates
-	 (list (append (car org-roam-capture-templates)
-		       '(:immediate-finish t)))))
-    (apply #'org-roam-node-insert args)))
-
-(defun kl/compile-treesit-grammars ()
-  (interactive)
-  (let ((langs (mapcar 'car treesit-language-source-alist)))
-    (dolist (lang langs)
-      (treesit-install-language-grammar lang))))
