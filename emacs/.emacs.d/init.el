@@ -58,7 +58,7 @@
   :custom
   (corfu-auto t)
   (corfu-auto-delay 0)
-  (corfu-auto-prefix 2)
+  (corfu-auto-prefix 1)
   :init (global-corfu-mode))
 
 (use-package spacious-padding

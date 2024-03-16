@@ -12,6 +12,8 @@
 	fill-column 100))
 
 (defun kl/eglot-managed-mode-hook ()
+  (setq-local eldoc-documentation-strategy #'eldoc-documentation-compose)
+  (fset #'jsonrpc--log-event #'ignore)
   (add-hook 'flymake-diagnostic-functions #'eglot-flymake-backend nil t)
   (flymake-mode 1))
 
