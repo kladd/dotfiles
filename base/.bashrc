@@ -41,4 +41,4 @@ alias ec='emacsclient -c'
 
 export PATH="$HOME/.local/bin:$HOME/bin:$HOME/.local/share/JetBrains/Toolbox/scripts:$PATH"
 
-. "$HOME/.cargo/env"
+[[ -f "$HOME/.cargo/env" ]] && . "$HOME/.cargo/env"
