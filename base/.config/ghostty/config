@@ -1,2 +1,10 @@
 font-family = "Berkeley Mono"
 theme = campbell
+
+confirm-close-surface = false
+quit-after-last-window-closed = true
+shell-integration = none
+macos-titlebar-style = "transparent"
+
+cursor-style = underline
+
