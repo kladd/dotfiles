@@ -6,7 +6,7 @@
 shopt -s checkwinsize;
 shopt -s histappend;
 
-export HISTSIZE=9000
+export HISTSIZE=-1
 export HISTCONTROL=ignoredups
 export HISTIGNORE="clear:bg:fg:cd:cd -:cd ..:exit:date:w:ls"
 
@@ -18,9 +18,9 @@ if which git > /dev/null; then
     alias gco='git checkout'
 
     [[ -f $HOME/.config/git/git-prompt.sh ]] && \
-	. $HOME/.config/git/git-prompt.sh
+	. "$HOME/.config/git/git-prompt.sh"
     [[ -f $HOME/.config/git/git-completion.bash ]] && \
-	. $HOME/.config/git/git-completion.bash
+	. "$HOME/.config/git/git-completion.bash"
 
     ___git_complete g __git_main
     ___git_complete gco _git_checkout
@@ -37,8 +37,8 @@ complete -cf sudo
 alias sudo='sudo -E'
 alias ls='ls --color=auto'
 alias ssh='TERM=xterm-256color ssh'
-alias ec='emacsclient -c'
 
 export PATH="$HOME/.local/bin:$HOME/bin:$HOME/.local/share/JetBrains/Toolbox/scripts:$PATH"
 
+[[ -f /opt/homebrew/bin/brew ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
 [[ -f "$HOME/.cargo/env" ]] && . "$HOME/.cargo/env"
