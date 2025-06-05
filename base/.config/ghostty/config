@@ -1,5 +1,5 @@
-font-family = "TX-02"
-font-size = 14
+font-family = "Berkeley Mono"
+font-size = 13
 theme = campbell
 
 confirm-close-surface = false
